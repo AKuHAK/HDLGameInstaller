@@ -1,0 +1,60 @@
+name: Build 
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+#  repository_dispatch:
+#    types: [Component_update]
+    
+    
+jobs:
+  build-packages:
+    runs-on: ubuntu-latest
+    container: ps2dev/ps2dev:v1.0
+    steps:
+    
+    - name: Install dependencies
+      run: |
+        apk add build-base git zip p7zip
+        
+    - uses: actions/checkout@v2
+    - run: |
+        git fetch --prune --unshallow
+        
+    - name: Compile
+      run: |
+        make
+        
+    - name: Get short SHA
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+
+
+    - name: copy program For Release
+      run: |
+        cp HDLGameInstaller/HDLGameInstaller.elf __Package/PS2/HDLGameInstaller.elf
+         
+    - name: zip Folder For Release
+      run: |
+        DATEE=`date '+[%Y-%m-%d]'`
+        mv __Package HDLGameInstaller-$DATEE
+        7z a -t7z -r FMCB-$VER.7z HDLGameInstaller*/*
+        
+    - name: Upload artifacts
+      if: ${{ success() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ matrix.package }}
+        path: |
+            *.7z
+
+    - name: Create release
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+      uses: marvinpinto/action-automatic-releases@latest
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "latest"
+        title: "Latest Build"
+        files: |
+               *.7z
