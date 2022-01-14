@@ -50,12 +50,12 @@ Pad support worsens performance. However, it is possible to connect to the PS2 a
 
 HDLGameInstaller may be installed (copied) onto and can be booted from: 
 
-```
-USB Mass Storage Devices. 
-Only USB disks are supported. Multi-function devices are not supported.
-The disk must have only one partition. Otherwise, the first partition will be accessed.
-PlayStation 2 HDD Unit.
-```
+
+- USB Mass Storage Devices. 
+  - Only USB disks are supported. Multi-function devices are not supported.
+  - The disk must have only one partition. Otherwise, the first partition will be accessed.
+- PlayStation 2 HDD Unit.
+
 #### Other devices are not supported.
 
 
