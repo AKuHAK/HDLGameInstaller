@@ -24,7 +24,8 @@ jobs:
         
     - name: Compile
       run: |
-        make
+        cd HDLGameInstaller
+        make clean all
         
     - name: Get short SHA
       id: slug

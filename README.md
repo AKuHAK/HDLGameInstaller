@@ -1,6 +1,6 @@
 # Introduction
 
-##### this program was made by @sp193, al credits go to him
+##### this program was made by @sp193 al credits go to him
 
 ##### [Original download site](https://sites.google.com/view/ysai187/home/projects/hdlgameinstaller)
 
