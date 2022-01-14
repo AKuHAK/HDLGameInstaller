@@ -40,7 +40,7 @@ jobs:
       run: |
         DATEE=`date '+[%Y-%m-%d]'`
         mv __Package HDLGameInstaller-$DATEE
-        7z a -t7z -r FMCB-$VER.7z HDLGameInstaller*/*
+        7z a -t7z -r HDLGameInstaller-$DATEE.7z HDLGameInstaller*/*
         
     - name: Upload artifacts
       if: ${{ success() }}
