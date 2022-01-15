@@ -41,7 +41,7 @@ jobs:
     - name: zip Folder For Release
       run: |
         DATEE=`date '+[%Y-%m-%d]'`
-        mv __Package HDLGameInstaller-$DATEE
+        mv __Package HDLGameInstaller-[$DATEE]
         7z a -t7z -r HDLGameInstaller-$DATEE.7z HDLGameInstaller*/*
         
     - name: Upload artifacts
